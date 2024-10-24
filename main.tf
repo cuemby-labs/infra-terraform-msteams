@@ -4,7 +4,7 @@
 
 resource "helm_release" "prometheus-msteams" {
   name       = var.helm_release_name
-  repository = "https://prometheus-msteams.github.io/"
+  repository = "https://prometheus-msteams.github.io/prometheus-msteams"
   chart      = "prometheus-msteams"
   version    = var.helm_release_version
   namespace  = var.namespace_name

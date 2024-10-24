@@ -1,10 +1,59 @@
 openapi: 3.0.3
 info:
-  title: OpenAPI schema for template walrus-template-template
+  title: OpenAPI schema for MSTeams template .
 components:
   schemas:
     variables:
       type: object
+      properties:
+        namespace_name:
+          title: Namespace Name
+          type: string
+          description: Namespace where MSTeams will be installed.
+          default: prometheus-system
+          x-walrus-ui:
+            group: Basic
+            order: 1
+        helm_release_name:
+          title: Helm Release Name
+          type: string
+          description: Name for the MSTeams Helm release.
+          default: prometheus-msteams
+          x-walrus-ui:
+            group: Basic
+            order: 2
+        helm_release_version:
+          title: Helm Release Version
+          type: string
+          description: Version of the MSTeams Helm chart.
+          default: 1.3.4
+          x-walrus-ui:
+            group: Basic
+            order: 3
+        alert_webhook:
+          title: Alert Webhook
+          type: string
+          description: Webhook URL for Prometheus alerts to MS Teams
+          default: https://new.webhook.url/...
+          x-walrus-ui:
+            group: Basic
+            order: 4
+        service_monitor:
+          title: Service Monitor
+          type: boolean
+          description: Enable or disable the service monitor
+          default: true
+          x-walrus-ui:
+            group: Basic
+            order: 5
+        release_label:
+          title: Release Label
+          type: string
+          description: Label used for the Prometheus release
+          default: prometheus
+          x-walrus-ui:
+            group: Basic
+            order: 6
       x-walrus-ui:
         groupOrder:
         - Basic

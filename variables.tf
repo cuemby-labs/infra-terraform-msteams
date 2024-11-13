@@ -26,6 +26,12 @@ variable "alert_webhook" {
   default     = "https://new.webhook.url/..."
 }
 
+variable "alert_channel" {
+  description = "Channel name for Prometheus alerts to MS Teams"
+  type        = string
+  default     = "alerts"
+}
+
 variable "service_monitor" {
   description = "Enable or disable the service monitor"
   type        = bool

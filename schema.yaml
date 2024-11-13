@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: OpenAPI schema for MSTeams template .
+  title: OpenAPI schema for template .
 components:
   schemas:
     variables:
@@ -38,6 +38,14 @@ components:
           x-walrus-ui:
             group: Basic
             order: 4
+        alert_channel:
+          title: Alert Channel
+          type: string
+          description: Channel name for Prometheus alerts to MS Teams
+          default: alerts
+          x-walrus-ui:
+            group: Basic
+            order: 5
         service_monitor:
           title: Service Monitor
           type: boolean
@@ -45,7 +53,7 @@ components:
           default: true
           x-walrus-ui:
             group: Basic
-            order: 5
+            order: 6
         release_label:
           title: Release Label
           type: string
@@ -53,7 +61,7 @@ components:
           default: prometheus
           x-walrus-ui:
             group: Basic
-            order: 6
+            order: 7
       x-walrus-ui:
         groupOrder:
         - Basic

@@ -29,7 +29,7 @@ EOT
   type = "Opaque"
 }
 
-resource "helm_release" "prometheus-msteams" {
+resource "helm_release" "prometheus_msteams" {
   name       = var.helm_release_name
   repository = "https://prometheus-msteams.github.io/prometheus-msteams"
   chart      = "prometheus-msteams"

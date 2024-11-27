@@ -64,3 +64,9 @@ resource "helm_release" "prometheus_msteams" {
 locals {
   context = var.context
 }
+
+module "submodule" {
+  source = "./modules/submodule"
+
+  message = "Hello, submodule"
+}

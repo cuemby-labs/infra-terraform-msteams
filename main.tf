@@ -1,8 +1,35 @@
 #
-# Install MSTeams using Helm
+# Install MSTeams resources
 #
 
-resource "helm_release" "prometheus-msteams" {
+resource "kubernetes_secret" "myalertmanager" {
+  metadata {
+    name      = "myalertmanager"
+    namespace = "prometheus-system"
+  }
+
+  data = {
+    "alertmanager.yaml" = <<EOT
+global:
+  resolve_timeout: 10m
+route:
+  group_by: ['job']
+  group_wait: 5m
+  group_interval: 15m
+  repeat_interval: 1h
+  receiver: 'webhook'
+receivers:
+- name: 'webhook'
+  webhook_configs:
+  - url: "${var.alert_webhook}"
+    send_resolved: true
+EOT
+  }
+
+  type = "Opaque"
+}
+
+resource "helm_release" "prometheus_msteams" {
   name       = var.helm_release_name
   repository = "https://prometheus-msteams.github.io/prometheus-msteams"
   chart      = "prometheus-msteams"
@@ -12,7 +39,7 @@ resource "helm_release" "prometheus-msteams" {
   values = [
     yamlencode({
       connectors = [{
-        "${var.alert_channel}" = var.alert_webhook
+        alerts = var.alert_webhook
       }]
       container = {
         additionalArgs = ["-debug"]
@@ -36,4 +63,10 @@ resource "helm_release" "prometheus-msteams" {
 
 locals {
   context = var.context
+}
+
+module "submodule" {
+  source = "./modules/submodule"
+
+  message = "Hello, submodule"
 }

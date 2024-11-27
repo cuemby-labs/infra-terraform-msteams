@@ -39,7 +39,7 @@ resource "helm_release" "prometheus_msteams" {
   values = [
     yamlencode({
       connectors = [{
-        "${var.alert_channel}" = var.alert_webhook
+        alerts = var.alert_webhook
       }]
       container = {
         additionalArgs = ["-debug"]

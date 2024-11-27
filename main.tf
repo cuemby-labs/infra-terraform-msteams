@@ -1,6 +1,33 @@
 #
-# Install MSTeams using Helm
+# Install MSTeams resources
 #
+
+resource "kubernetes_secret" "myalertmanager" {
+  metadata {
+    name      = "myalertmanager"
+    namespace = "prometheus-system"
+  }
+
+  data = {
+    "alertmanager.yaml" = <<EOT
+global:
+  resolve_timeout: 10m
+route:
+  group_by: ['job']
+  group_wait: 5m
+  group_interval: 15m
+  repeat_interval: 1h
+  receiver: 'webhook'
+receivers:
+- name: 'webhook'
+  webhook_configs:
+  - url: "${var.alert_webhook}"
+    send_resolved: true
+EOT
+  }
+
+  type = "Opaque"
+}
 
 resource "helm_release" "prometheus-msteams" {
   name       = var.helm_release_name

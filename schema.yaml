@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: OpenAPI schema for template .
+  title: OpenAPI schema for msteams template .
 components:
   schemas:
     variables:
@@ -42,7 +42,7 @@ components:
           title: Alert Channel
           type: string
           description: Channel name for Prometheus alerts to MS Teams
-          default: alerts
+          default: alerts_dev
           x-walrus-ui:
             group: Basic
             order: 5

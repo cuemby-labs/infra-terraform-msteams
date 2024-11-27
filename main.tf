@@ -21,7 +21,7 @@ route:
 receivers:
 - name: 'webhook'
   webhook_configs:
-  - url: 'http://prometheus-msteams:2000/"${var.alert_channel}"'
+  - url: 'http://prometheus-msteams:2000/${var.alert_channel}'
     send_resolved: true
 EOT
   }

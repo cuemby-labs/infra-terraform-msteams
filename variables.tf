@@ -44,6 +44,22 @@ variable "release_label" {
   default     = "prometheus"
 }
 
+variable "resources" {
+  description = "Resource limits and requests for the Prometheus msteams Helm release."
+  type        = map(map(string))
+
+  default = {
+    limits = {
+      cpu    = "10m"
+      memory = "32Mi"
+    }
+    requests = {
+      cpu    = "1m"
+      memory = "8Mi"
+    }
+  }
+}
+
 #
 # Contextual Fields
 #

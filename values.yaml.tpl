@@ -1,13 +1,13 @@
 connectors:
-  - ${var.alert_channel}: ${var.alert_webhook}
+  - ${alert_channel}: ${alert_webhook}
   container:
     additionalArgs:
       - -debug
 metrics:
   serviceMonitor:
-    enabled: ${var.service_monitor}
+    enabled: ${service_monitor}
     additionalLabels:
-      release: ${var.release_label}
+      release: ${release_label}
     scrapeInterval: "30s"
 
 # Pod resources

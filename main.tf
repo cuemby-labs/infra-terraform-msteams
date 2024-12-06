@@ -37,22 +37,15 @@ resource "helm_release" "prometheus_msteams" {
   namespace  = var.namespace_name
 
   values = [
-    yamlencode({
-      connectors = [{
-        "${var.alert_channel}" = var.alert_webhook
-      }]
-      container = {
-        additionalArgs = ["-debug"]
-      }
-      metrics = {
-        serviceMonitor = {
-          enabled = var.service_monitor
-          additionalLabels = {
-            release = var.release_label
-          }
-          scrapeInterval = "30s"
-        }
-      }
+    templatefile("${path.module}/values.yaml.tpl", {
+      alert_channel   = var.alert_channel,
+      alert_webhook   = var.alert_webhook,
+      service_monitor = var.service_monitor,
+      release_label   = var.release_label,
+      request_memory  = var.resources["requests"]["memory"],
+      limits_memory   = var.resources["limits"]["memory"],
+      request_cpu     = var.resources["requests"]["cpu"],
+      limits_cpu      = var.resources["limits"]["cpu"]
     })
   ]
 }

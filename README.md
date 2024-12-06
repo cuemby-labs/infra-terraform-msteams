@@ -14,6 +14,17 @@ module "msteams" {
   alert_webhook         = "https://new.webhook.url/..."  # Webhook URL for Prometheus alerts to MS Teams
   service_monitor       = true                           # Enable or disable serviceMonitor
   release_label         = "prometheus"                   # Label used for the Prometheus release
+
+  resources = {
+    limits = {
+      cpu    = "10m"
+      memory = "32Mi"
+    }
+    requests = {
+      cpu    = "1m"
+      memory = "8Mi"
+    }
+  }
 }
 ```
 
@@ -61,6 +72,8 @@ No modules.
 | <a name="input_alert_webhook"></a> [alert_webhook](#input_alert_webhook) | Webhook URL for Prometheus alerts to MS Teams. | `string` | `"https://new.webhook.url/..."` | yes |
 | <a name="input_service_monitor"></a> [service_monitor](#input_service_monitor) | Enable or disable serviceMonitor. | `boolean` | `"true"` | no |
 | <a name="input_release_label"></a> [release_label](#input_release_label) | Label used for the Prometheus release. | `string` | `"prometheus"` | yes |
+| <a name="input_resources"></a> [resources](#input_resources) | Resource limits and requests for the helm chart pods. | `map(object(string))` | `"See example"` | no |
+| <a name="input_context"></a> [context](#input\_context) | Receive contextual information. When Walrus deploys, Walrus will inject specific contextual information into this field.<br><br>Examples:<pre>context:<br>  project:<br>    name: string<br>    id: string<br>  environment:<br>    name: string<br>    id: string<br>  resource:<br>    name: string<br>    id: string</pre> | `map(any)` | `{}` | no |
 
 ## Outputs
 

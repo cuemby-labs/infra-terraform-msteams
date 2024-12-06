@@ -1,5 +1,5 @@
 connectors:
-  - ${alert_channel}: ${alert_webhook}
+- ${alert_channel}: ${alert_webhook}
   container:
     additionalArgs:
       - -debug

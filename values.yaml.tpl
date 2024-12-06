@@ -1,8 +1,8 @@
 connectors:
 - ${alert_channel}: ${alert_webhook}
-  container:
-    additionalArgs:
-      - -debug
+container:
+  additionalArgs:
+    - -debug
 metrics:
   serviceMonitor:
     enabled: ${service_monitor}
